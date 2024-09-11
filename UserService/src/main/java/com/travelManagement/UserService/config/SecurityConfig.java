@@ -26,34 +26,36 @@ import com.nimbusds.jose.proc.SecurityContext;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	
+
 	private final RsaKeyProperties properties;
 
 	public SecurityConfig(RsaKeyProperties properties) {
-	    this.properties = properties;
+		this.properties = properties;
 	}
-	
+
 	@Bean
 	JwtDecoder jwtDecoder() {
-	    return NimbusJwtDecoder.withPublicKey(properties.publicKey()).build();
+		return NimbusJwtDecoder.withPublicKey(properties.publicKey()).build();
 	}
-	
+
 	@Bean
-	JwtEncoder jwtEncoder(){
-	    JWK jwk = new RSAKey.Builder(properties.publicKey()).privateKey(properties.privateKey()).build();
-	    JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
-	    return new NimbusJwtEncoder(jwkSource);
+	JwtEncoder jwtEncoder() {
+		JWK jwk = new RSAKey.Builder(properties.publicKey()).privateKey(properties.privateKey()).build();
+		JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
+		return new NimbusJwtEncoder(jwkSource);
 	}
 
 	@Bean
 	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-		return new InMemoryUserDetailsManager(User.withUsername("shivam").password("{noop}root").authorities("read").build());
+		return new InMemoryUserDetailsManager(
+				User.withUsername("shivam").password("{noop}root").authorities("read").build());
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/test-controller/home").permitAll().anyRequest().authenticated())
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/test-controller/home").permitAll()
+						.requestMatchers("/login-controller/*").permitAll().anyRequest().authenticated())
 				.sessionManagement(Session -> Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
 				.httpBasic(Customizer.withDefaults()).build();
