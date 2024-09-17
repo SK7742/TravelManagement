@@ -14,6 +14,7 @@ import com.travelManagement.UserService.http.model.ErrorResponse;
 import com.travelManagement.UserService.model.User;
 import com.travelManagement.UserService.service.TokenService;
 import com.travelManagement.UserService.service.UserService;
+import com.travelManagement.UserService.service.impl.TokenServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginController {
 	
-	private final TokenService tokenService;
+	private final TokenServiceImpl tokenService;
 	private final UserService userService;
 	
 	
