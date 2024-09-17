@@ -80,4 +80,7 @@ public class User {
     
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<SessionActivity> sessions;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<VerificationUrl> verificationUrls;
 }
