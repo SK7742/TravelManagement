@@ -1,4 +1,4 @@
-package com.travelManagement.UserService.service;
+package com.travelManagement.UserService.service.impl;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -16,11 +16,11 @@ import com.travelManagement.UserService.model.User;
 import ch.qos.logback.core.util.StringUtil;
 
 @Service
-public class TokenService {
+public class TokenServiceImpl {
 
 	private final JwtEncoder jwtEncoder;
 
-	public TokenService(JwtEncoder jwtEncoder) {
+	public TokenServiceImpl(JwtEncoder jwtEncoder) {
 		this.jwtEncoder = jwtEncoder;
 	}
 
