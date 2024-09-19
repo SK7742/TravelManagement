@@ -14,13 +14,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity(name = "user_verification_urls")
-public class VerificationUrl {
+public class VerificationOtp {
 	
 	@Id
 	private Long id;
 	
-	@Column(name = "url")
-	private String url;
+	@Column(name = "otp")
+	private String otp;
 	
     @Column(name = "rec_start_timestamp")
     private LocalDateTime recStartTimeStamp;

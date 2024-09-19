@@ -82,5 +82,5 @@ public class User {
     private Set<SessionActivity> sessions;
     
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<VerificationUrl> verificationUrls;
+    private Set<VerificationOtp> verificationUrls;
 }
