@@ -2,9 +2,7 @@ package com.travelManagement.UserService.service.impl;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -12,8 +10,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import com.travelManagement.UserService.model.User;
-
-import ch.qos.logback.core.util.StringUtil;
 
 @Service
 public class TokenServiceImpl {
