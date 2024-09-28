@@ -13,7 +13,10 @@ import com.travelManagement.notificationService.model.User;
 import com.travelManagement.notificationService.service.OTPService;
 import com.travelManagement.notificationService.service.RegistrationService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class OTPController {
 
 	@Autowired
@@ -47,8 +50,7 @@ public class OTPController {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send OTP");
 			}
 		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send OTP");
 		}
 

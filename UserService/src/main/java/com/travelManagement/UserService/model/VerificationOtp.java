@@ -6,12 +6,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "user_verification_urls")
 public class VerificationOtp {
@@ -21,6 +25,9 @@ public class VerificationOtp {
 	
 	@Column(name = "otp")
 	private String otp;
+	
+	@Column(name = "type")
+	private String otpType;
 	
     @Column(name = "rec_start_timestamp")
     private LocalDateTime recStartTimeStamp;

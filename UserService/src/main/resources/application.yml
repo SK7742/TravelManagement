@@ -43,5 +43,8 @@ spring:
     create:
       topics:
         enable: 'true'
+rsa:
+  public-key: classpath:certs/public.pem
+  private-key: classpath:certs/private.pem
 server:
-  port: '8081'
+  port: '8080'
