@@ -29,7 +29,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 	@Override
 	public boolean sendResetTokenToEmail(String email) throws UserNotFoundException {
 		User user = userService.fetchUserByEmail(email);
-		HashMap<String, String> resetToken = tokenGeneratorHelper.generateResetPasswordLink();
+		HashMap<String, String> resetToken = tokenGeneratorHelper.generateResetPasswordToken();
 		mapVerificationOtpAndPersistToDb(user, resetToken);
 		return kafkaDtoMapper.mapUserResetTokenAndProduce(user, resetToken);
 	}
@@ -39,9 +39,9 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
 		verificationOtpRepository.save(VerificationOtp.builder()
 				.user(user)
 				.otp(resetToken.get("resetLink"))
-				.otpType("RESET_LINK")
+				.otpType(resetToken.get("otpType"))
 				.recStartTimeStamp(LocalDateTime.parse(resetToken.get("genTs")))
-				.recEndTimeStamp(LocalDateTime.parse(resetToken.get("exTs")))
+				.recEndTimeStamp(LocalDateTime.parse(resetToken.get("expTs")))
 				.deletedFlag(false)
 				.build());
 	}

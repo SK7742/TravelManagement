@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ import lombok.Setter;
 @Table(name = "user")
 public class User {
 	@Id
+	@JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 
@@ -49,33 +52,43 @@ public class User {
     @Column(name = "address")
     private String address;
 
+    @JsonIgnore
     @Column(name = "registered_on", nullable = false, updatable = false)
     private LocalDateTime registeredOn;
 
+    @JsonIgnore
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
+    @JsonIgnore
     @Column(name = "is_verified", nullable = false)
     private Boolean isVerified;
 
+    @JsonIgnore //TODO: Need to remove further
     @Column(name = "profile_picture")
     private byte[] profilePicture;
 
+    @JsonIgnore
     @Column(name = "rec_start_timestamp")
     private LocalDateTime recStartTimeStamp;
 
+    @JsonIgnore
     @Column(name = "rec_end_timestamp")
     private LocalDateTime recEndTimeStamp;
 
+    @JsonIgnore
     @Column(name = "deleted_flag", nullable = false)
     private Boolean deletedFlag;
     
+    @JsonIgnore
     @OneToMany
     private Set<Role> roles;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<SessionActivity> sessions;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<VerificationOtp> verificationUrls;
 }

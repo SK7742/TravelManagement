@@ -1,5 +1,6 @@
 package com.travelManagement.UserService.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -23,9 +24,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public UserServiceResponse submitRegistrationForm(User user) {
-		// TODO Auto-generated method stub
-
 		LOGGER.info("Registarion starts");
+		checkAndPopulateDefaultValuesForUserRegistration(user);
 		User userResponse = userRepository.save(user);
 		String successResponse = userResponse.getId() != null ? UserServiceConstant.REGISTRATION_STATUS_SUCCESS
 				: UserServiceConstant.REGISTRATION_STATUS_FAILURE;
@@ -35,10 +35,17 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return userServiceResponse;
 	}
 
+	private void checkAndPopulateDefaultValuesForUserRegistration(User user) {
+		user.setIsActive(true);
+		user.setDeletedFlag(false);
+		user.setIsVerified(false);
+		user.setRecStartTimeStamp(LocalDateTime.now());
+		user.setRecEndTimeStamp(LocalDateTime.of(9999, 01, 01, 0, 0));
+		user.setRegisteredOn(LocalDateTime.now());
+	}
+
 	@Override
 	public UserServiceResponse validateUser(User user) {
-		// TODO Auto-generated method stub
-
 		User userResponse = userRepository.findByEmail(user.getEmail());
 		UserServiceResponse userServiceResponse = new UserServiceResponse();
 		String message = userResponse != null ? "User already exists" : "It's new User";
@@ -49,7 +56,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public User fetchUserByPhoneNumber(String phoneNumber) {
-		// TODO Auto-generated method stub
 
 		Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
 		if (!user.isEmpty()) {

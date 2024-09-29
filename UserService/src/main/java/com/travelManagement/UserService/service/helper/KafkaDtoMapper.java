@@ -23,8 +23,9 @@ public class KafkaDtoMapper {
 		ResetPasswordPayload payload = new ResetPasswordPayload();
 		payload.setEmailId(user.getEmail());
 		payload.setLinkGenerationTime(resetToken.get("genTs"));
-		payload.setLinkExpirationTime(resetToken.get("exTs"));
+		payload.setLinkExpirationTime(resetToken.get("expTs"));
 		payload.setResetLink(resetToken.get("resetLink"));
+		payload.setOtpType(resetToken.get("otpType"));
 		payload.setUsername(user.getUsername());
 		
 		return kafkaProducer.produceMessageToEmailNotificationTopic(payload);
