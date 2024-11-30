@@ -1,8 +1,10 @@
 package com.travelManagement.bookingService.model;
 
-import java.time.LocalDateTime;
 import java.util.Set;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +14,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "vechical")
 public class Vechical {
-	private Long id;
-	private String vechicalMode;
+	@Id
+	private Long vechicalId;
+	private String vechicalSeatCapacity;
+//	private Set<String> seatTypes;
 	private String vechicalRegNo;
 	private String vechicalType;
 	private String vechicalMilage;
 	private String vechicalAverageSpeed;
-	private String vechicalSourcePlace;
-	private String vechicalDestinationPlace;
-	private LocalDateTime vechicalArrivalTime;
-	private String vechicalDepartureTime;
-	private String seatCapacity;
-	private Set<VechicalSeat> availableSeats;
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<SeatMap> seatMap;
 }

@@ -1,0 +1,34 @@
+spring:
+  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+  datasource:
+    hikari:
+      idle-timeout: '10000'
+      maximum-pool-size: '10'
+      auto-commit: 'false'
+      connection-timeout: '30000'
+      max-lifetime: '60000'
+      minimum-idle: '10000'
+    password: root
+    username: root
+    url: jdbc:mysql://localhost:3306/travelManager
+  application:
+    name: UserService
+    driverClassName: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
+  auto:
+    create:
+      topics:
+        enable: 'true'
+rsa:
+  public-key: classpath:certs/public.pem
+  private-key: classpath:certs/private.pem
+server:
+  port: '8080'
