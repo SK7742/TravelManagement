@@ -1,8 +1,12 @@
 package com.travelManagement.bookingService.model;
 
 import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -14,16 +18,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "vechical")
+@Entity(name = "tm_vechicals")
 public class Vechical {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long vechicalId;
-	private String vechicalSeatCapacity;
-//	private Set<String> seatTypes;
+	private int vechicalSeatCapacity;
+	private Set<String> seatTypes;
 	private String vechicalRegNo;
 	private String vechicalType;
 	private String vechicalMilage;
 	private String vechicalAverageSpeed;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<SeatMap> seatMap;
 }
