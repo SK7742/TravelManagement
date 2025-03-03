@@ -1,19 +1,16 @@
 package com.travelManagement.UserService.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -54,7 +51,7 @@ public class User {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "registered_on", nullable = false, updatable = false)
+    @Column(name = "registered_on", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime registeredOn;
 
     @Column(name = "is_active", nullable = false)
@@ -66,10 +63,10 @@ public class User {
     @Column(name = "profile_picture")
     private byte[] profilePicture;
 
-    @Column(name = "rec_start_timestamp")
+    @Column(name = "rec_start_timestamp", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime recStartTimeStamp;
 
-    @Column(name = "rec_end_timestamp")
+    @Column(name = "rec_end_timestamp", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime recEndTimeStamp;
 
     @Column(name = "deleted_flag", nullable = false)
