@@ -28,6 +28,14 @@ import com.nimbusds.jose.proc.SecurityContext;
 public class SecurityConfig {
 
 	private final RsaKeyProperties properties;
+	private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**",
+            "/test-controller/home",
+            "/user-registration/**"
+    };
 
 	public SecurityConfig(RsaKeyProperties properties) {
 		this.properties = properties;
@@ -54,10 +62,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/test-controller/home",
-						"/swagger-ui/**",
-			            "/swagger-ui.html",
-			            "/v3/api-docs/**").permitAll()
+				.authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITE_LIST).permitAll()
 						.requestMatchers("/login-controller/*").permitAll().anyRequest().authenticated())
 				.sessionManagement(Session -> Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))

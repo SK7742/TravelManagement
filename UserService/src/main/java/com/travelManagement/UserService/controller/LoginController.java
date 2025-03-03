@@ -15,11 +15,19 @@ import com.travelManagement.UserService.model.User;
 import com.travelManagement.UserService.service.UserService;
 import com.travelManagement.UserService.service.impl.TokenServiceImpl;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/login-controller")
 @RequiredArgsConstructor
+@SecurityScheme(
+        name = "Authorization",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer")
 public class LoginController {
 	
 	private final TokenServiceImpl tokenService;
