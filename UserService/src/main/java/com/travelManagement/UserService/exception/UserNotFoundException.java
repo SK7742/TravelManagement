@@ -1,10 +1,10 @@
 package com.travelManagement.UserService.exception;
 
-public class UserAlreadyExistException extends Exception {
+public class UserNotFoundException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private String errorCode;
 
-    public UserAlreadyExistException(String message, String errorCode) {
+    public UserNotFoundException(String message, String errorCode) {
         super(message);
         this.errorCode = errorCode;
     }

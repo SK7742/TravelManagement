@@ -45,8 +45,8 @@ public class LoginController {
 		String token = tokenService.generateToken(user);
 
         // Create response with token and user details
-        AuthResponse authResponse = new AuthResponse(token, user);
+//        AuthResponse authResponse = new AuthResponse(token, null);
 
-        return new ResponseEntity<>(authResponse, HttpStatus.OK);
+        return new ResponseEntity<>("Token- " + token, HttpStatus.OK);
 	}		
 }

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.travelManagement.UserService.constant.ErrorCodes;
+import com.travelManagement.UserService.constant.LocalDateTimeConstants;
 import com.travelManagement.UserService.exception.UserAlreadyExistException;
 import com.travelManagement.UserService.model.User;
 import com.travelManagement.UserService.repository.UserRepository;
@@ -27,7 +29,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 			return userRepository.save(user);
 		}
 		log.error("{} is already exists", user.getUsername());
-		throw new UserAlreadyExistException();
+		throw new UserAlreadyExistException(ErrorCodes.EM_USER_ALREADY_EXIST, ErrorCodes.EC_USER_ALREADY_EXIST);
 		
 		
 	}
@@ -37,7 +39,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		user.setIsActive(true);
 		user.setIsVerified(false);
 		user.setRecStartTimeStamp(LocalDateTime.now());
-		user.setRecEndTimeStamp(LocalDateTime.of(9999, 12, 31, 12, 0));
+		user.setRecEndTimeStamp(LocalDateTimeConstants.HIGH_DATE);
 		user.setRegisteredOn(LocalDateTime.now());
 	}
 
