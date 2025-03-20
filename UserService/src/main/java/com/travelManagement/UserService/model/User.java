@@ -3,6 +3,7 @@ package com.travelManagement.UserService.model;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -80,4 +81,7 @@ public class User {
     
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<VerificationOtp> verificationUrls;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<SecurityQuestion> securityQuestions;
 }

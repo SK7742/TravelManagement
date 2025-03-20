@@ -1,6 +1,9 @@
 package com.travelManagement.UserService.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.travelManagement.UserService.constant.LoginQueryParam;
 import com.travelManagement.UserService.exception.UserAlreadyExistException;
 import com.travelManagement.UserService.exception.UserNotFoundException;
+import com.travelManagement.UserService.model.SecurityQuestion;
 import com.travelManagement.UserService.model.User;
 import com.travelManagement.UserService.service.UserRegistrationService;
 import com.travelManagement.UserService.service.UserService;
@@ -37,4 +41,8 @@ public class UserController {
 		return userService.fetchUser(queryVal, password, queryType);
 	}
 	
+	@PostMapping("/securityQuestion")
+	public boolean addSecurityQuestion(@RequestBody List<SecurityQuestion> questions) {
+		return userService.addSecurityQuestionsForUser(questions);
+	}
 }
